@@ -20,6 +20,17 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private DataSource dataSource; //注入數據源
+
+    @Bean
+    PersistentTokenRepository persistentTokenRepository(){
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+//        jdbcTokenRepository.setCreateTableOnStartup(true);
+        return jdbcTokenRepository;
+    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,13 +59,16 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/success.html").permitAll() // 登录成功后的跳转路径 . // 允许所有人访问登录页面
                 .and().authorizeRequests()
                 .antMatchers("/","/test/hello","/user/login").permitAll() // 哪些路徑可以直接訪問不需要驗證
-                //                    当前登录用户，只有具备admin权限才可以访问这个路径
+                //1.当前登录用户，只有具备admin权限才可以访问这个路径
 //                    .antMatchers("/test/index").hasAuthority("admins")
-                // 具備其中一個角色
+                //2.具備其中一個角色
 //                    .antMatchers("/test/index").hasAnyAuthority("admins,manager")
-                // ROLE_
+                //3.ROLE_
                 .antMatchers("/test/index").hasRole("sale")
                 .anyRequest().authenticated() //所有請求都可以訪問
+                .and().rememberMe().tokenRepository(persistentTokenRepository())// jdbcTokenRepository 令牌生成
+                .tokenValiditySeconds(60) //設置有效時長:單位秒
+                .userDetailsService(userDetailsService)
                 .and().csrf().disable(); //關閉csrf防護
     }
 }
