@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 自定义实现类
  */
-@Service("userDetailsService")
+//@Service("userDetailsService")
 public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

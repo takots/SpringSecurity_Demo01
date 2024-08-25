@@ -20,17 +20,17 @@
   </properties>
 
   <dependencies>
-    <!--mybatis-plus-->
-<!--    <dependency>-->
-<!--      <groupId>com.baomidou</groupId>-->
-<!--      <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--      <version>3.0.5</version>-->
-<!--    </dependency>-->
-<!--    &lt;!&ndash;mysql&ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>mysql</groupId>-->
-<!--      <artifactId>mysql-connector-java</artifactId>-->
-<!--    </dependency>-->
+<!--    mybatis-plus-->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.0.5</version>
+    </dependency>
+    <!--mysql-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -57,11 +57,11 @@
 <!--      <artifactId>spring-boot-configuration-processor</artifactId>-->
 <!--      <optional>true</optional>-->
 <!--    </dependency>-->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.30</version>
+      </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
